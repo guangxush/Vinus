@@ -33,11 +33,11 @@ public class UserController {
         Boolean access = userService.findUserByIdAndPass(userId, password);
         if(access){
             log.info("login success!");
-            return "success";
+            return "userId: "+userId+" login success!!!";
         }else{
             log.error("login failed!");
         }
-        return "failed";
+        return "userId: "+userId+" login failed!!!";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -52,8 +52,10 @@ public class UserController {
             userName="new user";
         }
         if(userService.save(userId,userName,password)){
+            log.info("{} success register!", userId.toString());
             return "注册成功";
         }
+        log.error("{} register failed!", userId.toString());
         return "注册失败";
     }
 }

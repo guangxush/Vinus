@@ -49,12 +49,7 @@
             dataType: "text",
             contentType: "application/json;charset=utf-8",
             success: function (result, status) {
-                if(result == "success"){
-                    alert("登陆成功！！！");
-                }
-                else{
-                    alert("登录失败！！！");
-                }
+                alert(result);
             },
             error: function (result, status) {
                 alert("登录失败！！");
