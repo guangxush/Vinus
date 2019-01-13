@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>注册界面</title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<!-- 注册表单 -->
+<form style="margin-left:500px;margin-top:200px;">
+    <div class="form-group">
+        <label for="user" stype="display:inline;">账户：</label>
+        <input type="text" class="form-control" id="user" style="display:inline;width:200px;" autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <label for="username" style="display:inline;">昵称：</label>
+        <input type="text" class="form-control" id="username" style="display:inline;width:200px;" autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <label for="password" style="display:inline;">密码：</label>
+        <input type="password" class="form-control" id="password" style="display:inline;width:200px;" autocomplete="off" />
+    </div>
+    <button type="submit" class="btn btn-primary" onclick="register()">确认注册</button>
+    <button type="submit" class="btn btn-primary" onclick="login()">登录</button>
+</form>
+</body>
+<script>
+    function login() {
+        //跳转到注册界面register.html进行注册
+        window.open("login.html", "_blank");
+    }
+    function register() {
+        var userId = $('#user').val();
+        var userName = $('#username').val();
+        var password = $('#password').val();
+        var userdata = {
+            "userId":userId,
+            "userName":userName,
+            "password":password
+        };
+        $.ajax({
+            url: "/usersys/register",
+            data:JSON.stringify(userdata),
+            type:"POST",
+            //dataType: "text",
+            contentType: "application/json;charset=utf-8",
+            success: function (data, status) {
+                alert(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("请求在连接过程中出现错误..\n" + errorThrown);
+            }
+        });
+    }
+</script>
+</html>
