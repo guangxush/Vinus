@@ -1,6 +1,6 @@
-package com.shgx.mq.model;
+package com.shgx.db.model;
 
-
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -9,10 +9,10 @@ import lombok.Data;
  * @create 2019-01-13
  */
 @Data
-public class Message {
+@Builder
+public class MessageVO {
 
     private String exchange;
     private String queueName;
     private String messageValue;
-
 }
