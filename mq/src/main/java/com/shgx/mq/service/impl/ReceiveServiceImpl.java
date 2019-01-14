@@ -32,7 +32,7 @@ public class ReceiveServiceImpl implements ReceiveService {
     private static final String DEFAULT_MESSAGE = "default message";
 
 
-    //暂时先关闭监听，如果想主动发送请求保存数据可以打开
+    //暂时先关闭对于RabbitMQ的监听，如果想主动发送请求保存数据可以打开
     //@RabbitListener(queues="topic.message")//监听器监听指定的Queue
     @Override
     public void process(String messageName) {
