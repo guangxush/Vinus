@@ -1,5 +1,6 @@
 package com.shgx.business.aspect;
 
+import com.shgx.business.service.MailSendService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -16,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class LogAspect {
 
+    @Autowired
+    private MailSendService mailSendService;
+
     @Pointcut("execution(* com.shgx.business.service.*.*(..))||execution(* com.shgx.business.controller.*.*(..))")
     private void log() {
 
@@ -28,7 +32,7 @@ public class LogAspect {
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
         String errMsg = "Errors " + e + " happened in AccioService: " + getMethodNameAndArgs(joinPoint);
         log.error(errMsg);
-        //mailSend.sendmail(errMsg);
+        mailSendService.sendEmail(errMsg);
     }
 
     /**

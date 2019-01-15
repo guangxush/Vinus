@@ -32,12 +32,14 @@ public class RedisSendDataScheduledImpl implements RedisSendDataScheduled {
      * @param message
      */
     @Override
-    //@Scheduled(fixedRate = 1000 * 60 * 2)
     public void receiveMessage(String message) {
         System.out.println("receive the message is: "+message);
         receiveService.process(message);
     }
 
+    /**
+     * 定时将Rerdis中的数据弹出，发送给数据库 (2分钟)
+     */
     @Override
     @Scheduled(fixedRate = 1000 * 60 * 2)
     public void popListMessage(){

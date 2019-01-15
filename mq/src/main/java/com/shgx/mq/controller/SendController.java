@@ -34,12 +34,12 @@ public class SendController {
     }
 
     @RequestMapping(value = "/send/redis/channel", method = RequestMethod.POST)
-    public Boolean sendMessageInRedis(@RequestBody Message message){
+    public Boolean sendMessageInRedisChannel(@RequestBody Message message){
         return redisSaveService.sendChannelMess(channel, message.getMessageValue());
     }
 
     @RequestMapping(value = "/send/redis/list", method = RequestMethod.POST)
-    public Boolean sendMessageInRedis(@RequestBody Message message){
-        return redisSaveService.sendChannelMess(channel, message.getMessageValue());
+    public Boolean sendMessageInRedisList(@RequestBody Message message){
+        return redisSaveService.sendListMess(message.getMessageValue());
     }
 }

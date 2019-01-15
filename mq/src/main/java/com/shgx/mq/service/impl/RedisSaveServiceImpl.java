@@ -41,6 +41,7 @@ public class RedisSaveServiceImpl implements RedisSaveService {
             log.error("save the {} to redis failed!", message);
             return false;
         }
+        log.info("save the {} to redis success!", message);
         return true;
     }
 }

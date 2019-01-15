@@ -43,7 +43,7 @@ public class ReceiveServiceImpl implements ReceiveService {
         if (messageName == null) {
             message.setQueueName(DEFAULT_MESSAGE);
         }
-        message.setQueueName(messageName);
+        message.setMessageValue(messageName);
         persistenceMessage(message);
     }
 
