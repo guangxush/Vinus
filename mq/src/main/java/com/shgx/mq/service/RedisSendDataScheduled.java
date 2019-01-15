@@ -8,4 +8,6 @@ package com.shgx.mq.service;
 public interface RedisSendDataScheduled {
 
     void receiveMessage(String message);
+
+    void popListMessage();
 }
