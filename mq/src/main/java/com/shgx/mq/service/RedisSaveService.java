@@ -1,7 +1,5 @@
 package com.shgx.mq.service;
 
-import com.shgx.mq.model.Message;
-
 /**
  * @Description
  * @auther guangxush

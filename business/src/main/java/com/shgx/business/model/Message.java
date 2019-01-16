@@ -3,7 +3,7 @@ package com.shgx.business.model;
 import lombok.Data;
 
 /**
- * @Description
+ * @Description 消息处理
  * @auther guangxush
  * @create 2019-01-13
  */

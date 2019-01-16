@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean findUserByIdAndPass(Long userId, String password){
         Boolean login = false;
-        //Optional<User> users = userRepo.findUsersByUserIdAndAndPassword(userId, password);
+        //Optional<User> users = userRepo.findUsersByUserIdAndAndPassword(userId, password)
         Optional<User> user = userRepo.findFirstByUserIdAndAndPassword(userId, password);
         if(user.isPresent()){
             login = true;

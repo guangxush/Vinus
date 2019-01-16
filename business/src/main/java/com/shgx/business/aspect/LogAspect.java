@@ -1,6 +1,8 @@
 package com.shgx.business.aspect;
 
+import com.shgx.business.model.Message;
 import com.shgx.business.service.MailSendService;
+import com.shgx.business.service.RabbitMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -9,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @Description
+ * @Description 应用服务异常切面
  * @auther guangxush
  * @create 2019-01-13
  */
@@ -20,23 +22,28 @@ public class LogAspect {
     @Autowired
     private MailSendService mailSendService;
 
+    @Autowired
+    private RabbitMqService rabbitMqService;
+
+
     @Pointcut("execution(* com.shgx.business.service.*.*(..))||execution(* com.shgx.business.controller.*.*(..))")
     private void log() {
 
     }
 
     /**
-     * AOP joinpoint to handle exception and send message using email
+     * 捕获异常并把异常信息发送给用户
      * */
     @AfterThrowing(pointcut = "log()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
         String errMsg = "Errors " + e + " happened in AccioService: " + getMethodNameAndArgs(joinPoint);
         log.error(errMsg);
         mailSendService.sendEmail(errMsg);
+        rabbitMqService.sendLogToMQ(new Message(errMsg));
     }
 
     /**
-     * Java reflect to get class info
+     * 反射获取类文件信息
      * */
     private String getMethodNameAndArgs (JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();

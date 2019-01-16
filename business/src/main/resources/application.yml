@@ -1,5 +1,4 @@
 # base URL
-
 server:
   port: 8080
   servlet:
@@ -25,6 +24,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 rabbitmq:
-  exchange: exchange
-  queue: topic.message
+  exchange: business
+  queue: log
   url: http://localhost:8081/mq/send/
+  redis:
+    url: http://localhost:8081/mq/send/redis/list

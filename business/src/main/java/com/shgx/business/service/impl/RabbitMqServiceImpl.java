@@ -26,16 +26,50 @@ public class RabbitMqServiceImpl  implements RabbitMqService {
     @Value("${rabbitmq.queue}")
     private String queue;
 
+    /**
+     * 数据存储在mq模块下的rabbit mq中
+     */
     @Value("${rabbitmq.url}")
-    private String url;
+    private String rabbitUrl;
+
+    /**
+     * 数据存储在mq模块下的redis
+     */
+    @Value("${rabbitmq.redis.url}")
+    private String redisUrl;
 
     @Autowired
     private RestTemplateBuilder builder;
 
+    /**
+     * 发送用户行为数据到MQ，即时处理
+     * @param message
+     * @return
+     */
     @Override
-    public Boolean sendLogToMQ(Message message){
+    public Boolean sendUserBehaviorToMQ(Message message){
         message.setExchange(exchange);
         message.setQueueName(queue);
+        return requestUrl(rabbitUrl, message);
+    }
+
+    /**
+     * 发送日志信息到Redis,临时存储, 隔一段时间后在处理
+     * @param message
+     * @return
+     */
+    @Override
+    public Boolean sendLogToMQ(Message message){
+        return requestUrl(redisUrl, message);
+    }
+
+    /**
+     * 发送URL请求
+     * @param url
+     * @param message
+     * @return
+     */
+    private Boolean requestUrl(String url, Message message){
         JSONObject messageJson = JSONObject.fromObject(message);
         RestTemplate restTemplate = builder.build();
         Boolean saveResult = false;

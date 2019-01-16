@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description
+ * @Description 邮件配置文件
  * @auther guangxush
  * @create 2019/1/15
  */

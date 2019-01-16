@@ -4,6 +4,7 @@ import com.shgx.mq.service.ReceiveService;
 import com.shgx.mq.service.RedisSaveService;
 import com.shgx.mq.service.RedisSendDataScheduled;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
  * @create 2019/1/14
  */
 @Service
-//@EnableScheduling
 public class RedisSendDataScheduledImpl implements RedisSendDataScheduled {
 
     @Autowired
@@ -26,6 +26,9 @@ public class RedisSendDataScheduledImpl implements RedisSendDataScheduled {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Value("${redis.list.key}")
+    private String redisKey;
 
     /**
      * 收到通道的消息之后执行的方法
@@ -43,8 +46,8 @@ public class RedisSendDataScheduledImpl implements RedisSendDataScheduled {
     @Override
     @Scheduled(fixedRate = 1000 * 60 * 2)
     public void popListMessage(){
-        while(stringRedisTemplate.opsForList().size("queue.message")!=0){
-            String mess = stringRedisTemplate.opsForList().leftPop("queue.message");
+        while(stringRedisTemplate.opsForList().size(redisKey)!=0){
+            String mess = stringRedisTemplate.opsForList().leftPop(redisKey);
             receiveService.process(mess);
         }
     }

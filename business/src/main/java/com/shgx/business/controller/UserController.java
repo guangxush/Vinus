@@ -22,6 +22,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登录请求
+     * @param userVO
+     * @return
+     */
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(@RequestBody UserVO userVO){
         if(userVO==null){
@@ -40,6 +45,11 @@ public class UserController {
         return "userId: "+userId+" login failed!!!";
     }
 
+    /**
+     * 用户注册请求
+     * @param user
+     * @return
+     */
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register(@RequestBody User user){
         Long userId = user.getUserId();

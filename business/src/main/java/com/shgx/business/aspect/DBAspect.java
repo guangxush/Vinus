@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @Description
+ * @Description 数据库异常切面
  * @auther guangxush
  * @create 2019-01-13
  */
@@ -25,6 +25,11 @@ public class DBAspect {
 
     }
 
+    /**
+     * 将数据库操作日志缓存
+     * @param ret
+     * @throws Throwable
+     */
     @AfterReturning(returning = "ret", pointcut = "db()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容

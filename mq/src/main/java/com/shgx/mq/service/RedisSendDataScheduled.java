@@ -7,7 +7,14 @@ package com.shgx.mq.service;
  */
 public interface RedisSendDataScheduled {
 
+    /**
+     * 收到通道的消息之后执行的方法
+     * @param message
+     */
     void receiveMessage(String message);
 
+    /**
+     * redis定时发送数据
+     */
     void popListMessage();
 }

@@ -3,6 +3,7 @@ package com.shgx.mq.service.impl;
 import com.shgx.mq.service.RedisSaveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class RedisSaveServiceImpl implements RedisSaveService {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Value("${redis.list.key}")
+    private String redisKey;
 
     /**
      * 向通道发送消息的方法,数据保存在Redis中去
@@ -36,7 +40,7 @@ public class RedisSaveServiceImpl implements RedisSaveService {
     @Override
     public Boolean sendListMess(String message){
         try{
-            stringRedisTemplate.opsForList().rightPush("queue.message", message);
+            stringRedisTemplate.opsForList().rightPush(redisKey, message);
         }catch (Exception e){
             log.error("save the {} to redis failed!", message);
             return false;

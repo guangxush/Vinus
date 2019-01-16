@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * @Description
+ * @Description 需要消息内容
  * @auther guangxush
  * @create 2019-01-13
  */

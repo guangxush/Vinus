@@ -21,6 +21,10 @@ public class ShowMessageController {
     @Autowired
     private ShowMessageService showMessageService;
 
+    /**
+     * 展示所有的日志信息
+     * @return
+     */
     @RequestMapping(value = "/mess/all", method = RequestMethod.GET)
     public List<Message> sendMessage(){
         return showMessageService.showAllMessage();

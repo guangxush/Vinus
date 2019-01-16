@@ -1,12 +1,11 @@
 package com.shgx.business.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
 
 /**
- * @Description
+ * @Description 用户
  * @auther guangxush
  * @create 2019-01-13
  */

@@ -56,7 +56,7 @@ public class MessageServiceImpl implements MessageService {
      * 主动接收消息并保存在数据库中
      * @param messageValue
      */
-    @RabbitListener(queues="topic.message")//监听器监听指定的Queue
+    @RabbitListener(queues="log")//监听器监听指定的Queue
     @Override
     public void receive(String messageValue) {
         Message message = Message.builder()

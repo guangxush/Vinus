@@ -21,6 +21,11 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    /**
+     * 保存日志信息到数据库中
+     * @param message
+     * @return
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Boolean sendMessage(@RequestBody MessageVO message){
         String exchange = message.getExchange();

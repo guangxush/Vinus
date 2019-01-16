@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.internet.MimeMessage;
 
 /**
- * @Description
+ * @Description 发送邮件
  * @auther guangxush
  * @create 2019/1/15
  */

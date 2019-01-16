@@ -20,6 +20,10 @@ public class ShowMessageServiceImpl implements ShowMessageService {
     @Autowired
     private MessageRepo messageRepo;
 
+    /**
+     * 展示所有的消息内容
+     * @return
+     */
     @Override
     public List<Message> showAllMessage(){
         Optional<List<Message>> messages = Optional.ofNullable(messageRepo.findAll());

@@ -29,6 +29,12 @@ public class ReceiveServiceImpl implements ReceiveService {
     @Value("${db.url}")
     private String url;
 
+    @Value("rabbitmq.exchange")
+    private String exchange;
+
+    @Value("rabbitmq.queues")
+    private String queues;
+
     private static final String DEFAULT_MESSAGE = "default message";
 
 
@@ -38,8 +44,8 @@ public class ReceiveServiceImpl implements ReceiveService {
     public void process(String messageName) {
         System.out.println("message:"+messageName);
         Message message = new Message();
-        message.setExchange("exchange");
-        message.setQueueName("topic.message");
+        message.setExchange(exchange);
+        message.setQueueName(queues);
         if (messageName == null) {
             message.setQueueName(DEFAULT_MESSAGE);
         }
@@ -50,7 +56,6 @@ public class ReceiveServiceImpl implements ReceiveService {
     public Boolean persistenceMessage(Message message){
         JSONObject messageJson = JSONObject.fromObject(message);
         RestTemplate restTemplate = builder.build();
-        //String url = "http://localhost:8082/db/save";
         Boolean saveResult = false;
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
