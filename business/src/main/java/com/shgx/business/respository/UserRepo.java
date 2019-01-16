@@ -21,5 +21,12 @@ public interface UserRepo extends JpaRepository<User, Long> {
      */
     Optional<User> findUsersByUserIdAndAndPassword(Long userId, String password);
 
+    /**
+     * 查询id和密码是否匹配
+     * @param userId
+     * @param password
+     * @return
+     */
+    Optional<User> findFirstByUserIdAndAndPassword(Long userId, String password);
 
 }
