@@ -26,7 +26,7 @@
             <label for="password" style="display:inline;">密码：</label>
             <input type="password" class="form-control" id="password" style="display:inline;width:200px;"autocomplete="off" />
         </div>
-        <button class="btn btn-primary" id="login_btn" onclick="login()">登录</button>
+        <button type="submit" class="btn btn-primary" id="login_btn" onclick="login()">登录</button>
         <button type="submit" class="btn btn-primary" onclick="register()">注册</button>
     </form>
 </body>
@@ -49,10 +49,12 @@
             dataType: "text",
             contentType: "application/json;charset=utf-8",
             success: function (result, status) {
-                alert(result);
+                console.log(result);
+                $("#tip").html("<span style='color:blueviolet'>恭喜，登录成功！</span>");
             },
             error: function (result, status) {
-                alert("登录失败！！");
+                console.log(result);
+                $("#tip").html("<span style='color:red'>登录失败，请重试！</span>");
             },
         })
     }

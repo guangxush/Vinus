@@ -3,84 +3,35 @@
 <head>
     <meta charset="utf-8">
     <title>日志显示</title>
-    <!-- 新 Bootstrap4 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
-    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
-    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap样式 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
+
+    <!-- jquery -->
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap-table.min.js -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 <body>
 <!-- 信息显示 -->
 <div>
-    <table id="table"/>
+    <table data-toggle="table" data-url="http://localhost:8083/show/mess/all">
+        <thead>
+        <tr>
+            <th data-field="id">日志id</th>
+            <th data-field="exchange">路由器</th>
+            <th data-field="queueName">队列名称</th>
+            <th data-field="messageValue">日志内容</th>
+            <th data-field="saveDate">存储日期</th>
+        </tr>
+        </thead>
+    </table>
 </div>
 
 </body>
-<script type="javascript">
-    $(document).ready(function(){
-        $('#table').bootstrapTable({
-            ajax : function (request) {
-                $.ajax({
-                    type : "GET",
-                    url : "http://localhost:8083/show/mess/all",
-                    contentType: "application/json;charset=utf-8",
-                    dataType:"json",
-                    data:'',
-                    jsonp:'callback',
-                    success : function (msg) {
-                        request.success({
-                            row : msg
-                        });
-                        $('#table').bootstrapTable('load', msg);
-                    },
-                    error:function(){
-                        alert("错误");
-                    }
-                });
-            },
-            toolbar:'#toolbar',
-            singleSelect:true,
-            clickToSelect:true,
-            sortName: "create_time",
-            sortOrder: "desc",
-            pageSize: 15,
-            pageNumber: 1,
-            pageList: "[10, 25, 50, 100, All]",
-            showToggle: true,
-            showRefresh: true,
-            showColumns: true,
-            search: true,
-            pagination: true,
-            columns: [{
-                field: "state",
-                checkbox:true,
-            },{
-                field: 'id',
-                title: '日志id',
-                switchable: true
-            }, {
-                field: 'exchange',
-                title: '路由器',
-                switchable: true
-            }, {
-                field: 'queueName',
-                title: '队列名称',
-                switchable: true
-            }, {
-                field: 'messageValue',
-                title: '日志内容',
-                switchable: true
-            }, {
-                field: 'saveDate',
-                title: '存储日期',
-                switchable: true,
-                sortable: true
-            }],
-
-        });
-    });
-</script>
 </html>
